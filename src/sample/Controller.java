@@ -7,6 +7,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
+import java.util.Objects;
+
 public class Controller {
 
 
@@ -14,7 +17,7 @@ public class Controller {
     public Button btnExitGame;
     public Button btnReset;
 
-    public Button btn0;
+
     public Button btn1;
     public Button btn2;
     public Button btn3;
@@ -30,13 +33,10 @@ public class Controller {
     public Button btn13;
     public Button btn14;
     public Button btn15;
+    public Button btn0;
+    public GridPane gridPane;
 
     private Game game;
-
-    private Button[][] buttons = {
-            {btn0, btn1},
-            {btn4,btn5}
-    };
 
 
     public Controller() {
@@ -46,9 +46,7 @@ public class Controller {
     }
 
 
-
-
-    public void isDisabled(boolean visibility){
+    public void isDisabled(boolean visibility) {
         btn0.setDisable(visibility);
         btn1.setDisable(visibility);
         btn2.setDisable(visibility);
@@ -70,7 +68,6 @@ public class Controller {
     public void initialize() {
 
         isDisabled(true);
-
 
 
     }
@@ -96,215 +93,386 @@ public class Controller {
 
     }
 
-
-
-
-
-
-
+    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
+    }
 
 
     public void clickBtn0() {
-        double x= btn0.getTranslateX();
-        double y = btn0.getLayoutY();
+        Button b0 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 0));
+        Button b1 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 0));
+        Button b4 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 1));
 
-        btn0.setLayoutX(btn12.getLayoutX());
-        btn0.setLayoutY(btn12.getLayoutY());
-        if (btn1.getText().equals(" ")) {
-            btn0.setText(" ");
-            btn1.setText("1");
-        } else if (btn4.getText().equals(" ")) {
-            btn0.setText(" ");
-            btn4.setText("1");
+
+
+
+
+        if (b1.getText().equals(" ")) {
+            GridPane.setColumnIndex(b0, 1);
+            GridPane.setRowIndex(b0, 0);
+            GridPane.setColumnIndex(b1, 0);
+            GridPane.setRowIndex(b1, 0);
+        } else if (b4.getText().equals(" ")) {
+            GridPane.setColumnIndex(b0, 0);
+            GridPane.setRowIndex(b0, 1);
+            GridPane.setColumnIndex(b4, 0);
+            GridPane.setRowIndex(b4, 0);
         }
+
     }
 
     public void clickBtn1() {
-        if (btn0.getText().equals(" ")) {
-            btn0.setText("1");
-            btn1.setText(" ");
-        } else if (btn2.getText().equals(" ")) {
-            btn2.setText("2");
-            btn1.setText(" ");
-        } else if (btn5.getText().equals(" ")) {
-            btn5.setText("2");
-            btn1.setText(" ");
+
+        Button b0 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 0));
+        Button b1 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 0));
+        Button b2 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 0));
+        Button b5 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 1));
+
+        if (b0.getText().equals(" ")) {
+            GridPane.setColumnIndex(b0, 1);
+            GridPane.setRowIndex(b0, 0);
+            GridPane.setColumnIndex(b1, 0);
+            GridPane.setRowIndex(b1, 0);
+        } if (b2.getText().equals(" ")) {
+            GridPane.setColumnIndex(b2, 1);
+            GridPane.setRowIndex(b2, 0);
+            GridPane.setColumnIndex(b1, 2);
+            GridPane.setRowIndex(b1, 0);
+        }  if (b5.getText().equals(" ")) {
+            GridPane.setColumnIndex(b5, 1);
+            GridPane.setRowIndex(b5, 0);
+            GridPane.setColumnIndex(b1, 1);
+            GridPane.setRowIndex(b1, 1);
 
         }
     }
 
     public void clickBtn2() {
-        if (btn1.getText().equals(" ")) {
-            btn1.setText("3");
-            btn2.setText(" ");
-        }else if (btn3.getText().equals(" ")) {
-            btn3.setText("3");
-            btn2.setText(" ");
-        }else if (btn6.getText().equals(" ")) {
-            btn6.setText("3");
-            btn2.setText(" ");
+
+
+        Button b1 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 0));
+        Button b2 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 0));
+        Button b3 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 0));
+        Button b6 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
+
+        if (b1.getText().equals(" ")) {
+            GridPane.setColumnIndex(b2, 1);
+            GridPane.setRowIndex(b2, 0);
+            GridPane.setColumnIndex(b1, 2);
+            GridPane.setRowIndex(b1, 0);
+
+        } else if (b3.getText().equals(" ")) {
+            GridPane.setColumnIndex(b2, 3);
+            GridPane.setRowIndex(b2, 0);
+            GridPane.setColumnIndex(b3, 2);
+            GridPane.setRowIndex(b3, 0);
+
+        } else if (b6.getText().equals(" ")) {
+            GridPane.setColumnIndex(b2, 2);
+            GridPane.setRowIndex(b2, 1);
+            GridPane.setColumnIndex(b6, 2);
+            GridPane.setRowIndex(b6, 0);
+
         }
 
     }
 
     public void clickBtn3() {
-        if (btn2.getText().equals(" ")) {
-            btn2.setText("4");
-            btn3.setText(" ");
-        }else if (btn7.getText().equals(" ")){
-            btn7.setText("4");
-            btn3.setText("");
+
+        Button b2 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 0));
+        Button b3 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 0));
+        Button b7 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 1));
+
+        if (b2.getText().equals(" ")) {
+            GridPane.setRowIndex(b3, 0);
+            GridPane.setColumnIndex(b3, 2);
+            GridPane.setRowIndex(b2, 0);
+            GridPane.setColumnIndex(b2, 3);
+
+        } else if (b7.getText().equals(" ")) {
+            GridPane.setRowIndex(b3, 1);
+            GridPane.setColumnIndex(b3, 3);
+            GridPane.setRowIndex(b7, 0);
+            GridPane.setColumnIndex(b7, 3);
         }
 
     }
 
     public void clickBtn4() {
-        if(btn0.getText().equals(" ")){
-            btn0.setText("5");
-            btn4.setText(" ");
-        }
-        else if (btn5.getText().equals(" ")) {
-            btn5.setText("5");
-            btn4.setText(" ");
-        }else if(btn8.getText().equals(" ")){
-            btn8.setText("5");
-            btn4.setText(" ");
+        Button b0 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 0));
+        Button b4 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 1));
+        Button b5 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 1));
+        Button b8 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 2));
+
+        if (b0.getText().equals(" ")) {
+            GridPane.setRowIndex(b4, 0);
+            GridPane.setColumnIndex(b4, 0);
+            GridPane.setRowIndex(b0, 1);
+            GridPane.setColumnIndex(b0, 0);
+        } else if (b5.getText().equals(" ")) {
+            GridPane.setRowIndex(b4, 1);
+            GridPane.setColumnIndex(b4, 1);
+            GridPane.setRowIndex(b5, 1);
+            GridPane.setColumnIndex(b5, 0);
+        } else if (b8.getText().equals(" ")) {
+            GridPane.setRowIndex(b4, 2);
+            GridPane.setColumnIndex(b4, 0);
+            GridPane.setRowIndex(b8, 1);
+            GridPane.setColumnIndex(b8, 0);
         }
 
     }
 
     public void clickBtn5() {
-        if(btn1.getText().equals(" ")){
-            btn1.setText("6");
-            btn5.setText(" ");
-        }
-        else if (btn4.getText().equals(" ")) {
-            btn4.setText("6");
-            btn5.setText(" ");
-        }else if(btn6.getText().equals(" ")){
-            btn6.setText("6");
-            btn5.setText(" ");
-        }else if(btn9.getText().equals(" ")){
-            btn9.setText("6");
-            btn5.setText(" ");
+        Button b1 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 0));
+        Button b4 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 1));
+        Button b5 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 1));
+        Button b6 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
+        Button b9 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 2));
+
+        if (b1.getText().equals(" ")) {
+            GridPane.setRowIndex(b5, 0);
+            GridPane.setColumnIndex(b5, 1);
+            GridPane.setRowIndex(b1, 1);
+            GridPane.setColumnIndex(b1, 1);
+        } else if (b4.getText().equals(" ")) {
+            GridPane.setRowIndex(b5, 1);
+            GridPane.setColumnIndex(b5, 0);
+            GridPane.setRowIndex(b4, 1);
+            GridPane.setColumnIndex(b4, 1);
+        } else if (b6.getText().equals(" ")) {
+            GridPane.setRowIndex(b5, 1);
+            GridPane.setColumnIndex(b5, 2);
+            GridPane.setRowIndex(b6, 1);
+            GridPane.setColumnIndex(b6, 1);
+        } else if (b9.getText().equals(" ")) {
+            GridPane.setRowIndex(b5, 2);
+            GridPane.setColumnIndex(b5, 1);
+            GridPane.setRowIndex(b9, 1);
+            GridPane.setColumnIndex(b9, 1);
         }
 
 
     }
 
     public void clickBtn6() {
-        if (btn2.getText().equals(" ")) {
-            btn2.setText("7");
-            btn6.setText(" ");
-        }
-        else if (btn5.getText().equals(" ")) {
-            btn5.setText("7");
-            btn6.setText(" ");
-        }
-        else if (btn7.getText().equals(" ")) {
-            btn7.setText("7");
-            btn6.setText(" ");
-        } else if (btn10.getText().equals(" ")) {
-            btn10.setText("7");
-            btn6.setText(" ");
+        Button b2 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 0));
+        Button b5 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 1));
+        Button b6 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
+        Button b7 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 1));
+        Button b10 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 2));
+
+
+
+        if (b2.getText().equals(" ")) {
+            GridPane.setRowIndex(b6, 0);
+            GridPane.setColumnIndex(b6, 2);
+            GridPane.setRowIndex(b2, 1);
+            GridPane.setColumnIndex(b2, 2);
+        } else if (b5.getText().equals(" ")) {
+            GridPane.setRowIndex(b6, 1);
+            GridPane.setColumnIndex(b6, 1);
+            GridPane.setRowIndex(b5, 1);
+            GridPane.setColumnIndex(b5, 2);
+        } else if (b7.getText().equals(" ")) {
+            GridPane.setRowIndex(b6, 1);
+            GridPane.setColumnIndex(b6, 3);
+            GridPane.setRowIndex(b7, 1);
+            GridPane.setColumnIndex(b7, 2);
+        } else if (b10.getText().equals(" ")) {
+            GridPane.setRowIndex(b6, 2);
+            GridPane.setColumnIndex(b6, 2);
+            GridPane.setRowIndex(b10, 1);
+            GridPane.setColumnIndex(b10, 2);
         }
 
 
     }
 
     public void clickBtn7() {
-        if (btn3.getText().equals(" ")) {
-            btn3.setText("8");
-            btn7.setText(" ");
-        } else if (btn6.getText().equals(" ")) {
-            btn6.setText("8");
-            btn7.setText(" ");
-        }else if (btn11.getText().equals(" ")) {
-            btn11.setText("8");
-            btn7.setText(" ");
+
+        Button b3 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 0));
+        Button b6 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
+        Button b7 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 1));
+        Button b11 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 2));
+
+
+        if (b3.getText().equals(" ")) {
+            GridPane.setRowIndex(b7, 0);
+            GridPane.setColumnIndex(b7, 3);
+            GridPane.setRowIndex(b3, 1);
+            GridPane.setColumnIndex(b3, 3);
+        } else if (b6.getText().equals(" ")) {
+            GridPane.setRowIndex(b7, 1);
+            GridPane.setColumnIndex(b7, 2);
+            GridPane.setRowIndex(b6, 1);
+            GridPane.setColumnIndex(b6, 3);
+        } else if (b11.getText().equals(" ")) {
+            GridPane.setRowIndex(b7, 2);
+            GridPane.setColumnIndex(b7, 3);
+            GridPane.setRowIndex(b11, 1);
+            GridPane.setColumnIndex(b11, 3);
         }
 
 
     }
 
     public void clickBtn8() {
-        if (btn4.getText().equals(" ")) {
-            btn4.setText("9");
-            btn8.setText(" ");
-        } else if (btn13.getText().equals(" ")) {
-            btn12.setText(" ");
-            btn13.setText("13");
-        } else if (btn9.getText().equals(" ")) {
-            btn9.setText("10");
-            btn8.setText(" ");
+
+
+        Button b4 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 1));
+        Button b8 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 2));
+        Button b9 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 2));
+        Button b12 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 3));
+
+
+
+        if (b4.getText().equals(" ")) {
+            GridPane.setRowIndex(b8, 1);
+            GridPane.setColumnIndex(b8, 0);
+            GridPane.setRowIndex(b4, 2);
+            GridPane.setColumnIndex(b4, 0);
+        } else if (b12.getText().equals(" ")) {
+            GridPane.setRowIndex(b8, 3);
+            GridPane.setColumnIndex(b8, 0);
+            GridPane.setRowIndex(b12, 2);
+            GridPane.setColumnIndex(b12, 0);
+        } else if (b9.getText().equals(" ")) {
+            GridPane.setRowIndex(b8, 3);
+            GridPane.setColumnIndex(b8, 1);
+            GridPane.setRowIndex(b9, 3);
+            GridPane.setColumnIndex(b9, 0);
         }
 
     }
 
     public void clickBtn9() {
-        if (btn12.getText().equals(" ")) {
-            btn12.setText("10");
-            btn9.setText(" ");
-        } else if (btn10.getText().equals(" ")) {
-            btn10.setText("11");
-            btn9.setText(" ");
-        } else if (btn8.getText().equals(" ")) {
-            btn8.setText("10");
-            btn9.setText(" ");
-        } else if (btn5.getText().equals(" ")) {
-            btn5.setText("10");
-            btn9.setText(" ");
-        } else if (btn13.getText().equals(" ")) {
-            btn9.setText(" ");
-            btn13.setText("10");
+
+        Button b5 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 1));
+        Button b8 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 2));
+        Button b9 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 2));
+        Button b10 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 2));
+        Button b13 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 3));
+
+
+
+        if (b5.getText().equals(" ")) {
+            GridPane.setRowIndex(b9, 1);
+            GridPane.setColumnIndex(b9, 1);
+            GridPane.setRowIndex(b5, 2);
+            GridPane.setColumnIndex(b5, 1);
+        } else if (b8.getText().equals(" ")) {
+            GridPane.setRowIndex(b9, 2);
+            GridPane.setColumnIndex(b9, 0);
+            GridPane.setRowIndex(b8, 2);
+            GridPane.setColumnIndex(b8, 1);
+
+        }
+        else if (b10.getText().equals(" ")) {
+            GridPane.setRowIndex(b9, 2);
+            GridPane.setColumnIndex(b9, 2);
+            GridPane.setRowIndex(b10, 2);
+            GridPane.setColumnIndex(b10, 1);
+        } else if (b13.getText().equals(" ")) {
+            GridPane.setRowIndex(b9, 3);
+            GridPane.setColumnIndex(b9, 1);
+            GridPane.setRowIndex(b13, 2);
+            GridPane.setColumnIndex(b13, 1);
         }
 
 
     }
 
     public void clickBtn10() {
-        if (btn14.getText().equals(" ")) {
-            btn14.setText("11");
-            btn10.setText(" ");
-        } else if (btn9.getText().equals(" ")) {
-            btn10.setText(" ");
-            btn9.setText("11");
-        } else if (btn6.getText().equals(" ")) {
-            btn10.setText(" ");
-            btn6.setText("7");
-        } else if (btn11.getText().equals(" ")) {
-            btn10.setText(" ");
-            btn11.setText("12");
+
+        Button b6 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
+        Button b9 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 2));
+        Button b10 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 2));
+        Button b11 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 2));
+        Button b14 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 3));
+
+        if (b6.getText().equals(" ")) {
+            GridPane.setRowIndex(b10, 1);
+            GridPane.setColumnIndex(b10, 2);
+            GridPane.setRowIndex(b6, 2);
+            GridPane.setColumnIndex(b6, 2);
+        } else if (b9.getText().equals(" ")) {
+            GridPane.setRowIndex(b10, 2);
+            GridPane.setColumnIndex(b10, 1);
+            GridPane.setRowIndex(b9, 2);
+            GridPane.setColumnIndex(b9, 2);
+        }
+
+        else if (b11.getText().equals(" ")) {
+            GridPane.setRowIndex(b10, 2);
+            GridPane.setColumnIndex(b10, 3);
+
+            GridPane.setRowIndex(b11, 2);
+            GridPane.setColumnIndex(b11, 2);
+        } else if (b14.getText().equals(" ")) {
+            GridPane.setRowIndex(b10, 3);
+            GridPane.setColumnIndex(b10, 2);
+            GridPane.setRowIndex(b14, 2);
+            GridPane.setColumnIndex(b14, 2);
         }
 
 
     }
+
+
 
     public void clickBtn11() {
 
-        if (btn15.getText().equals(" ")) {
-            btn15.setText("12");
-            btn11.setText(" ");
-        } else if (btn10.getText().equals(" ")) {
-            btn11.setText(" ");
-            btn10.setText("12");
-        } else if (btn7.getText().equals(" ")) {
-            btn7.setText("8");
-            btn11.setText(" ");
+        Button b7 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 1));
+        Button b10 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 2));
+        Button b11 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 2));
+        Button b15 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 3));
+
+
+        if (b7.getText().equals(" ")) {
+            GridPane.setRowIndex(b11, 1);
+            GridPane.setColumnIndex(b11, 3);
+            GridPane.setRowIndex(b7, 2);
+            GridPane.setColumnIndex(b7, 3);
+        } else if (b10.getText().equals(" ")) {
+            GridPane.setRowIndex(b11, 2);
+            GridPane.setColumnIndex(b11, 2);
+            GridPane.setRowIndex(b10, 2);
+            GridPane.setColumnIndex(b10, 3);
+        } else if (b15.getText().equals(" ")) {
+
+            GridPane.setRowIndex(b11, 3);
+            GridPane.setColumnIndex(b11, 3);
+            GridPane.setRowIndex(b15, 2);
+            GridPane.setColumnIndex(b15, 3);
+
         }
+
 
     }
 
+
     public void clickBtn12() {
-        if (btn8.getText().equals(" ")) {
-            btn12.setText(" ");
-            btn8.setText("9");
-        } else if (btn13.getText().equals(" ")) {
-            btn12.setText(" ");
-            btn13.setText("13");
-        } else if (btn9.getText().equals(" ")) {
-            btn12.setText(" ");
-            btn9.setText("13");
+        Button b8 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 2));
+        Button b12 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 3));
+        Button b13 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 3));
+
+
+        if (b8.getText().equals(" ")) {
+            GridPane.setRowIndex(b12, 2);
+            GridPane.setColumnIndex(b12, 0);
+            GridPane.setRowIndex(b8, 3);
+            GridPane.setColumnIndex(b8, 0);
+        } else if (b13.getText().equals(" ")) {
+            GridPane.setRowIndex(b12, 3);
+            GridPane.setColumnIndex(b12, 1);
+            GridPane.setRowIndex(b13, 3);
+            GridPane.setColumnIndex(b13, 0);
         }
 
 
@@ -312,15 +480,26 @@ public class Controller {
 
     public void clickBtn13() {
 
-        if (btn14.getText().equals(" ")) {
-            btn13.setText(" ");
-            btn14.setText("14");
-        } else if (btn9.getText().equals(" ")) {
-            btn13.setText(" ");
-            btn9.setText("10");
-        } else if (btn12.getText().equals(" ")) {
-            btn12.setText("13");
-            btn13.setText(" ");
+        Button b9 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 2));
+        Button b12 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 3));
+        Button b13 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 3));
+        Button b14 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 3));
+
+        if (b14.getText().equals(" ")) {
+            GridPane.setRowIndex(b13, 3);
+            GridPane.setColumnIndex(b13, 2);
+            GridPane.setRowIndex(b14, 3);
+            GridPane.setColumnIndex(b14, 1);
+        } else if (b9.getText().equals(" ")) {
+            GridPane.setRowIndex(b13, 2);
+            GridPane.setColumnIndex(b13, 1);
+            GridPane.setRowIndex(b9, 3);
+            GridPane.setColumnIndex(b9, 1);
+        } else if (b12.getText().equals(" ")) {
+            GridPane.setRowIndex(b13, 2);
+            GridPane.setColumnIndex(b13, 0);
+            GridPane.setRowIndex(b12, 3);
+            GridPane.setColumnIndex(b12, 1);
         }
 
     }
@@ -328,28 +507,49 @@ public class Controller {
     public void clickBtn14() {
 
 
+        Button b10 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 2));
+        Button b13 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 1, 3));
+        Button b14 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 3));
+        Button b15 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 3));
 
 
+        if (b15.getText().equals(" ")) {
 
-        if (btn15.getText().equals(" ")) {
+            GridPane.setRowIndex(b14, 3);
+            GridPane.setColumnIndex(b14, 3);
+            GridPane.setRowIndex(b15, 3);
+            GridPane.setColumnIndex(b15, 2);
 
-            GridPane.setColumnIndex(btn13, 2);
-            GridPane.setRowIndex(btn13, 3);
-            GridPane.setColumnIndex(btn14, 1);
-            GridPane.setRowIndex(btn14, 3);
-
+        }else if (b13.getText().equals(" ")) {
+            GridPane.setRowIndex(b14, 3);
+            GridPane.setColumnIndex(b14, 1);
+            GridPane.setRowIndex(b13, 3);
+            GridPane.setColumnIndex(b13, 2);
+        }else if (b10.getText().equals(" ")) {
+            GridPane.setRowIndex(b14, 2);
+            GridPane.setColumnIndex(b14, 2);
+            GridPane.setRowIndex(b10, 3);
+            GridPane.setColumnIndex(b10, 2);
         }
 
     }
 
     public void clickBtn15() {
 
-        if (btn14.getText().equals(" ")) {
-            btn15.setText(" ");
-            btn14.setText("15");
-        } else if (btn11.getText().equals(" ")) {
-            btn15.setText(" ");
-            btn11.setText("12");
+        Button b11 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 2));
+        Button b14 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 3));
+        Button b15 = (Button)  Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 3));
+
+        if (b14.getText().equals(" ")) {
+            GridPane.setRowIndex(b14, 3);
+            GridPane.setColumnIndex(b14, 3);
+            GridPane.setRowIndex(b15, 3);
+            GridPane.setColumnIndex(b15, 2);
+        } else if (b11.getText().equals(" ")) {
+            GridPane.setRowIndex(b11, 3);
+            GridPane.setColumnIndex(b11, 3);
+            GridPane.setRowIndex(b15, 2);
+            GridPane.setColumnIndex(b15, 3);
         }
     }
 }
