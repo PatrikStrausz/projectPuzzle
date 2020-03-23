@@ -1,8 +1,6 @@
 package sample;
 
 public class Game {
-
-
     private Field field;
     private State state;
 
@@ -11,37 +9,39 @@ public class Game {
         this.state = State.READY;
     }
 
-    public Field getField() {
-        return field;
-    }
-
-    public void start() {
-        if (state == State.READY) {
+    public void start(){
+        if (state==State.READY) {
             state = State.RUNNING;
+            field = new Field();
+            field.shuffle();
+            field.print();
         }
-
     }
 
-    public void reset() {
+    public void reset(){
         if (state != State.READY) {
             state = State.READY;
             this.field = null;
         }
     }
 
-    public void end() {
-        if (state != State.RUNNING) {
+    public void end(){
+        if (state == State.RUNNING) {
             state = State.OVER;
-            this.field = null;
         }
     }
 
-    public void nextMove(int code) {
-        if (state == State.RUNNING) {
+    public void nextMove(int code){
+        if(state == State.RUNNING){
+//            field.toggleTiles(code);
+            field.print();
+            if(field.isWinner()){
+                end();
+            }
         }
-        if (field.isWon()) {
-            System.out.println("You have won!");
-            end();
-        }
+    }
+
+    public Field getField() {
+        return field;
     }
 }

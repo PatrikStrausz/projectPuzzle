@@ -1,16 +1,9 @@
 package sample;
 
+import java.util.Random;
+
 public class Tile {
     private int value;
-
-
-    public Tile() {
-
-    }
-
-    public Tile(int value) {
-        this.value = value;
-    }
 
     public int getValue() {
         return value;
@@ -18,5 +11,15 @@ public class Tile {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public void toggle() {
+        Random r = new Random();
+        value = r.nextInt(15)+1;
+
+    }
+
+    public Tile() {
+        value =0;
     }
 }

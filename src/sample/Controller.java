@@ -3,22 +3,18 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 public class Controller {
 
 
-    public Button btnStart;
+    public Button btnRestart;
     public Button btnExitGame;
-    public Button btnReset;
-
-
+    public Button btnNewGame;
+    public Button btn0;
     public Button btn1;
     public Button btn2;
     public Button btn3;
@@ -34,66 +30,67 @@ public class Controller {
     public Button btn13;
     public Button btn14;
     public Button btn15;
-    public Button btn0;
+    private Game game;
     public GridPane gridPane;
 
-    private Game game;
-
-
     public Controller() {
-
-
         game = new Game();
-
     }
 
 
-    public void isDisabled(boolean visibility) {
-        btn0.setDisable(visibility);
-        btn1.setDisable(visibility);
-        btn2.setDisable(visibility);
-        btn3.setDisable(visibility);
-        btn4.setDisable(visibility);
-        btn5.setDisable(visibility);
-        btn6.setDisable(visibility);
-        btn7.setDisable(visibility);
-        btn8.setDisable(visibility);
-        btn9.setDisable(visibility);
-        btn10.setDisable(visibility);
-        btn11.setDisable(visibility);
-        btn12.setDisable(visibility);
-        btn13.setDisable(visibility);
-        btn14.setDisable(visibility);
-        btn15.setDisable(visibility);
-    }
-
-    public void initialize() {
-
-        isDisabled(true);
+    private void rePaint() {
+        Tile[][] arr = game.getField().getArr();
+        btn0.setText(String.valueOf(arr[0][0].getValue()));
+        btn1.setText(String.valueOf(arr[0][1].getValue()));
+        btn2.setText(String.valueOf(arr[0][2].getValue()));
+        btn3.setText(String.valueOf(arr[0][3].getValue()));
+        btn4.setText(String.valueOf(arr[1][0].getValue()));
+        btn5.setText(String.valueOf(arr[1][1].getValue()));
+        btn6.setText(String.valueOf(arr[1][2].getValue()));
+        btn7.setText(String.valueOf(arr[1][3].getValue()));
+        btn8.setText(String.valueOf(arr[2][0].getValue()));
+        btn9.setText(String.valueOf(arr[2][1].getValue()));
+        btn10.setText(String.valueOf(arr[2][2].getValue()));
+        btn11.setText(String.valueOf(arr[2][3].getValue()));
+        btn12.setText(String.valueOf(arr[3][0].getValue()));
+        btn13.setText(String.valueOf(arr[3][1].getValue()));
+        btn14.setText(String.valueOf(arr[3][2].getValue()));
+        btn15.setText(String.valueOf(arr[3][3].getValue()));
 
 
-
-
-    }
-
-    public void reset() {
-        game.reset();
-        btnStart.setDisable(true);
-
-    }
-
-    public void start() {
-        game.start();
-        btnStart.setDisable(true);
-        isDisabled(false);
-
-
-    }
-
-    public void exit() {
-        game.end();
-        Stage stage = (Stage) btnExitGame.getScene().getWindow();
-        stage.close();
+        if (btn0.getText().equals("0")) {
+            btn0.setText(" ");
+        } else if (btn1.getText().equals("0")) {
+            btn1.setText(" ");
+        } else if (btn2.getText().equals("0")) {
+            btn2.setText(" ");
+        } else if (btn3.getText().equals("0")) {
+            btn3.setText(" ");
+        } else if (btn4.getText().equals("0")) {
+            btn4.setText(" ");
+        } else if (btn5.getText().equals("0")) {
+            btn5.setText(" ");
+        } else if (btn6.getText().equals("0")) {
+            btn6.setText(" ");
+        } else if (btn7.getText().equals("0")) {
+            btn7.setText(" ");
+        } else if (btn8.getText().equals("0")) {
+            btn8.setText(" ");
+        } else if (btn9.getText().equals("0")) {
+            btn9.setText(" ");
+        } else if (btn10.getText().equals("0")) {
+            btn10.setText(" ");
+        } else if (btn11.getText().equals("0")) {
+            btn11.setText(" ");
+        } else if (btn12.getText().equals("0")) {
+            btn12.setText(" ");
+        } else if (btn13.getText().equals("0")) {
+            btn13.setText(" ");
+        } else if (btn14.getText().equals("0")) {
+            btn14.setText(" ");
+        } else if (btn15.getText().equals("0")) {
+            btn15.setText(" ");
+        }
 
     }
 
@@ -106,6 +103,61 @@ public class Controller {
         return null;
     }
 
+    public void clickNewGame(ActionEvent event) {
+        game.start();
+        btnNewGame.setDisable(true);
+        btnRestart.setDisable(false);
+        btn0.setDisable(false);
+        btn1.setDisable(false);
+        btn2.setDisable(false);
+        btn3.setDisable(false);
+        btn4.setDisable(false);
+        btn5.setDisable(false);
+        btn6.setDisable(false);
+        btn7.setDisable(false);
+        btn8.setDisable(false);
+        btn9.setDisable(false);
+        btn10.setDisable(false);
+        btn11.setDisable(false);
+        btn12.setDisable(false);
+        btn13.setDisable(false);
+        btn14.setDisable(false);
+        btn15.setDisable(false);
+        rePaint();
+
+
+    }
+
+    public void clickRestartGame(ActionEvent event) {
+        game.reset();
+        btn0.setDisable(true);
+        btn1.setDisable(true);
+        btn2.setDisable(true);
+        btn3.setDisable(true);
+        btn4.setDisable(true);
+        btn5.setDisable(true);
+        btn6.setDisable(true);
+        btn7.setDisable(true);
+        btn8.setDisable(true);
+        btn9.setDisable(true);
+        btn10.setDisable(true);
+        btn11.setDisable(true);
+        btn12.setDisable(true);
+        btn13.setDisable(true);
+        btn14.setDisable(true);
+        btn15.setDisable(true);
+
+        btnNewGame.setDisable(false);
+        btnRestart.setDisable(true);
+
+    }
+
+    public void clickExitGame(ActionEvent event) {
+        game.end();
+        Stage stage = (Stage) btnExitGame.getScene().getWindow();
+        stage.close();
+
+    }
 
     public void clickBtn0(ActionEvent event) {
         Button b0 = (Button) Objects.requireNonNull(getNodeFromGridPane(gridPane, 0, 0));
@@ -155,7 +207,6 @@ public class Controller {
         Button b2 = (Button) Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 0));
         Button b3 = (Button) Objects.requireNonNull(getNodeFromGridPane(gridPane, 3, 0));
         Button b6 = (Button) Objects.requireNonNull(getNodeFromGridPane(gridPane, 2, 1));
-
 
 
         if (b1.getText().equals(" ")) {
@@ -468,4 +519,6 @@ public class Controller {
             b15.setText(" ");
         }
     }
+
+
 }
